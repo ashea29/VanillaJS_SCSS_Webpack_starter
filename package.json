@@ -1,0 +1,19 @@
+{
+  "name": "vanillajs_scss_webpack_starter",
+  "version": "1.0.0",
+  "description": "VanillaJS SCSS Webpack starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashea29/VanillaJS_SCSS_Webpack_starter.git"
+  },
+  "author": "Andrew Shea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashea29/VanillaJS_SCSS_Webpack_starter/issues"
+  },
+  "homepage": "https://github.com/ashea29/VanillaJS_SCSS_Webpack_starter#readme"
+}

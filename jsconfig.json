@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@components": ["src/components"],
+      "@components/*": ["src/components/*"],
+      "@styles": ["src/styles"],
+      "@styles/*": ["src/styles/*"],
+      "@pages": ["src/pages"],
+      "@pages/*": ["src/pages/*"],
+      "@state": ["src/state"],
+      "@state/*": ["src/state/*"],
+      "@utils": ["src/utils"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
