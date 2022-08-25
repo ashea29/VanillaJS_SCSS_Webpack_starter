@@ -29,7 +29,6 @@
     "handlebars": "^4.7.7",
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^5.3.2",
-    "html-webpack-tags-plugin": "latest",
     "lit-html": "latest",
     "mini-css-extract-plugin": "^2.2.0",
     "sass": "^1.38.1",
