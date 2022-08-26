@@ -1,0 +1,5 @@
+import { html } from "lit-html";
+
+const Hero = html` <h1 class="hero">Vanilla JS & Scss</h1> `;
+
+export default Hero;
