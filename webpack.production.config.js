@@ -76,7 +76,7 @@ module.exports = {
       chunks: ["home"],
       title: "Home",
       description: "Home page",
-      template: "src/page-template.hbs",
+      template: "src/pages/base-template.hbs",
       minify: false,
     }),
     // new HtmlWebpackPlugin({

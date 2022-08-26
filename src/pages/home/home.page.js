@@ -1,8 +1,8 @@
-import "@pages/global.styles.scss";
-import "./home.page.scss";
 import { render } from "lit-html";
 import HomeTemplate from "./home.template";
 import Hero from "./components/hero/hero.module";
+import "@pages/global.styles.scss";
+import "./home.page.scss";
 
 class Home {
   template = HomeTemplate;
@@ -12,10 +12,6 @@ class Home {
   init() {
     const renderTarget = document.body;
     render(this.template, renderTarget);
-    // render(this.template, document.body)
-    // const container = document.createElement("div");
-    // container.classList.add("container");
-    // document.body.appendChild(container);
 
     this.initComponents();
   }
