@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: {
-    home: "./src/pages/home.module.js",
+    home: "./src/pages/home/home.module.js",
   },
   output: {
     filename: "[name].[contenthash].js",

@@ -13,8 +13,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components": ["src/components"],
-      "@components/*": ["src/components/*"],
+      "@layoutComponents": ["src/layoutComponents"],
+      "@layoutComponents/*": ["src/layoutComponents/*"],
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@utils": ["src/utils"],
