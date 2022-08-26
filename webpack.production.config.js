@@ -79,13 +79,5 @@ module.exports = {
       template: "src/pages/base-template.hbs",
       minify: false,
     }),
-    // new HtmlWebpackPlugin({
-    //     filename: 'kiwi.html',
-    //     chunks: ['kiwi'],
-    //     title: 'Kiwi',
-    //     description: 'Kiwi',
-    //     template: 'src/page-template.hbs',
-    //     minify: false
-    // })
   ],
 };
