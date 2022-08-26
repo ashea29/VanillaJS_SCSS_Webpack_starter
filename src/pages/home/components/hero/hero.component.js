@@ -7,14 +7,17 @@ class Hero {
   //     const renderTarget = document.querySelector(".container");
   //     render(HeroTemplate, renderTarget);
   //   }
-  //   template = HeroTemplate;
-  //   renderTarget = document.querySelector(".container");
+  template = HeroTemplate;
+  // renderTarget = document.querySelector(".container");
 
   init() {
-    const el = document.createElement("h1");
-    const containerEl = document.querySelector(".container");
+    // const el = document.createElement("h1");
+    // el.innerHTML = "Vanilla JS & Scss";
+    // const containerEl = document.querySelector(".container");
+    // containerEl.appendChild(el);
+    const renderTarget = document.querySelector(".container");
+    render(this.template, renderTarget);
     // render(this.template, this.renderTarget);
-    containerEl.appendChild(el);
   }
 }
 
