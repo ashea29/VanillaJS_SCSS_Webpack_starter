@@ -52,14 +52,6 @@ module.exports = {
         test: /\.scss$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
-      //   {
-      //     test: /\.css$/,
-      //     use: [MiniCssExtractPlugin.loader, "css-loader"],
-      //   },
-      //   {
-      //     test: /\.scss$/,
-      //     use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      //   },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -78,9 +70,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: "[name].[contenthash].css",
-    // }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: "index.html",
@@ -90,13 +79,5 @@ module.exports = {
       description: "Home page",
       minify: false,
     }),
-    // new HtmlWebpackPlugin({
-    //     filename: 'kiwi.html',
-    //     chunks: ['kiwi'],
-    //     title: 'Kiwi',
-    //     template: 'src/page-template.hbs',
-    //     description: 'Kiwi',
-    //     minify: false
-    // })
   ],
 };
