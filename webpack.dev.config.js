@@ -1,11 +1,42 @@
 const path = require("path");
+const { readdirSync } = require("fs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const pagesDir = path.resolve(__dirname, "./src/pages");
+
+const getDirectories = (sourceDir) =>
+  readdirSync(sourceDir, { withFileTypes: true })
+    .filter((item) => item.isDirectory())
+    .map((dir) => dir.name);
+
+const pages = getDirectories(pagesDir);
+
+const entryPoints = {};
+const pluginArray = [];
+pluginArray.push(new CleanWebpackPlugin());
+// console.log(pluginArray);
+
+pages.forEach((page) => {
+  entryPoints[page] = `./src/pages/${page}/${page}.module.js`;
+
+  pluginArray.push(
+    new HtmlWebpackPlugin({
+      filename: page === "home" ? "index.html" : `${page}.html`,
+      chunks: [`${page}`],
+      title: page,
+      template: "src/pages/base-template.hbs",
+      description: `${page} page`,
+      minify: false,
+    })
+  );
+});
+// console.log("Here is the list of pages: ", pages);
+// console.log("Here are the entry points: ", entryPoints);
+// console.log(pluginArray);
+
 module.exports = {
-  entry: {
-    home: "./src/pages/home/home.module.js",
-  },
+  entry: entryPoints,
   output: {
     filename: "[name].bundle.js",
     path: path.resolve(__dirname, "./dist"),
@@ -69,15 +100,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      filename: "index.html",
-      chunks: ["home"],
-      title: "Home",
-      template: "src/pages/base-template.hbs",
-      description: "Home page",
-      minify: false,
-    }),
-  ],
+  plugins: pluginArray,
 };

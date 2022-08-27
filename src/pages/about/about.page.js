@@ -1,11 +1,11 @@
 import { render } from "lit-html";
-import HomeTemplate from "./home.template";
+import AboutTemplate from "./about.template";
 import Hero from "./components/hero/hero.module";
 // import "@pages/global.styles.scss";
-import "./home.page.scss";
+import "./about.page.scss";
 
-class Home {
-  template = HomeTemplate;
+class About {
+  template = AboutTemplate;
 
   components = [{ module: Hero }];
 
@@ -23,4 +23,4 @@ class Home {
   }
 }
 
-export default Home;
+export default About;
