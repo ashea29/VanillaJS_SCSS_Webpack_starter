@@ -20,7 +20,8 @@
       "@utils": ["src/utils"],
       "@utils/*": ["src/utils/*"],
       "@src": ["src"],
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@globalStyles": ["src/globalStyles"]
     }
   },
   "include": ["**/*.ts", "**/*.js"],

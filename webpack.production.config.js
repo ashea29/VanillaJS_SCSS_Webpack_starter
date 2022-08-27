@@ -3,6 +3,7 @@ const { readdirSync } = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const TerserWebpackPlugin = require("terser-webpack-plugin")
 
 const pagesDir = path.resolve(__dirname, "./src/pages");
 
@@ -17,7 +18,7 @@ const entryPoints = {};
 const pluginArray = [];
 pluginArray.push(
   new MiniCssExtractPlugin({
-    filename: "[name].[contenthash].css",
+    filename: "styles/[name].[contenthash].css",
   })
 );
 pluginArray.push(new CleanWebpackPlugin());
@@ -36,26 +37,36 @@ pages.forEach((page) => {
     })
   );
 });
-// console.log("Here is the list of pages: ", pages);
-// console.log("Here are the entry points: ", entryPoints);
+
 
 module.exports = {
   entry: entryPoints,
   output: {
-    filename: "[name].[contenthash].js",
+    filename: "scripts/[name].[contenthash].js",
     path: path.resolve(__dirname, "./dist"),
-    publicPath: "",
   },
   mode: "production",
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "./src/components/"),
-      "@pages": path.resolve(__dirname, "src/pages/"),
-      "@utils": path.resolve(__dirname, "src/utils/"),
-      "@src": path.resolve(__dirname, "./src/")
+      "@pages": path.resolve(__dirname, "./src/pages/"),
+      "@utils": path.resolve(__dirname, "./src/utils/"),
+      "@src": path.resolve(__dirname, "./src/"),
+      "@globalStyles": path.resolve(__dirname, "./src/globalStyles"),
     },
   },
   optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserWebpackPlugin({
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false
+          }
+        }
+      })
+    ],
     splitChunks: {
       chunks: "all",
       minSize: 3000,
@@ -78,11 +89,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          }, 
+          "css-loader"
+        ],
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader
+          }, 
+          "css-loader",
+          "sass-loader"
+        ],
       },
       {
         test: /\.js$/,

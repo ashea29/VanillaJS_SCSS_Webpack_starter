@@ -15,7 +15,6 @@ const pages = getDirectories(pagesDir);
 const entryPoints = {};
 const pluginArray = [];
 pluginArray.push(new CleanWebpackPlugin());
-// console.log(pluginArray);
 
 pages.forEach((page) => {
   entryPoints[page] = `./src/pages/${page}/${page}.module.js`;
@@ -31,34 +30,27 @@ pages.forEach((page) => {
     })
   );
 });
-// console.log("Here is the list of pages: ", pages);
-// console.log("Here are the entry points: ", entryPoints);
-// console.log(pluginArray);
+
 
 module.exports = {
   entry: entryPoints,
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "./dist/scripts"),
     publicPath: "",
   },
   mode: "development",
   devServer: {
-    port: 9000,
-    static: {
-      directory: path.resolve(__dirname, "./dist"),
-    },
-    devMiddleware: {
-      index: "index.html",
-      writeToDisk: true,
-    },
+    port: 3000,
+    open: true
   },
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "./src/components/"),
       "@pages": path.resolve(__dirname, "./src/pages/"),
       "@utils": path.resolve(__dirname, "./src/utils/"),
-      "@src": path.resolve(__dirname, "./src/")
+      "@src": path.resolve(__dirname, "./src/"),
+      "@globalStyles": path.resolve(__dirname, "./src/globalStyles"),
     },
   },
   module: {
