@@ -1,7 +1,7 @@
 import { render } from "lit-html";
 import AboutTemplate from "./about.template";
 import Hero from "./components/hero/hero.module";
-// import "@pages/global.styles.scss";
+import "@src/global.styles.scss";
 import "./about.page.scss";
 
 class About {

@@ -18,7 +18,9 @@
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@utils": ["src/utils"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@src": ["src"],
+      "@src/*": ["src/*"]
     }
   },
   "include": ["**/*.ts", "**/*.js"],
