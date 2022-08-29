@@ -1,21 +1,16 @@
 const path = require("path");
-const { readdirSync } = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserWebpackPlugin = require("terser-webpack-plugin");
 
-const pagesDir = path.resolve(__dirname, "./src/pages");
+const {
+  pages,
+  entryPoints,
+  pluginArray,
+  hbsPatialDirs,
+} = require("./webpackUtils");
 
-const getDirectories = (sourceDir) =>
-  readdirSync(sourceDir, { withFileTypes: true })
-    .filter((item) => item.isDirectory())
-    .map((dir) => dir.name);
-
-const pages = getDirectories(pagesDir);
-
-const entryPoints = {};
-const pluginArray = [];
 pluginArray.push(
   new MiniCssExtractPlugin({
     filename: "styles/[name].[contenthash].css",
@@ -33,7 +28,7 @@ pages.forEach((page) => {
       title: page,
       template: `src/pages/${page}/${page}.template.hbs`,
       description: `${page} page`,
-      minify: false,
+      minify: true,
     })
   );
 });
@@ -121,10 +116,7 @@ module.exports = {
         use: {
           loader: "handlebars-loader",
           options: {
-            partialDirs: [
-              path.resolve(__dirname, "./src/pages/about/components/heading"),
-              path.resolve(__dirname, "./src/pages/home/components/heading"),
-            ],
+            partialDirs: hbsPatialDirs,
           },
         },
       },
