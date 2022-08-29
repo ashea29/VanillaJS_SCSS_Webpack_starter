@@ -24,13 +24,12 @@ pages.forEach((page) => {
       filename: page === "home" ? "index.html" : `${page}.html`,
       chunks: [`${page}`],
       title: page,
-      template: "src/pages/base-template.hbs",
+      template: `src/pages/${page}/${page}.template.hbs`,
       description: `${page} page`,
       minify: false,
     })
   );
 });
-
 
 module.exports = {
   entry: entryPoints,
@@ -42,7 +41,7 @@ module.exports = {
   mode: "development",
   devServer: {
     port: 3000,
-    open: true
+    open: true,
   },
   resolve: {
     alias: {
@@ -89,7 +88,15 @@ module.exports = {
       },
       {
         test: /\.hbs$/,
-        use: ["handlebars-loader"],
+        use: {
+          loader: "handlebars-loader",
+          options: {
+            partialDirs: [
+              path.resolve(__dirname, "./src/pages/about/components/heading"),
+              path.resolve(__dirname, "./src/pages/home/components/heading"),
+            ],
+          },
+        },
       },
     ],
   },
