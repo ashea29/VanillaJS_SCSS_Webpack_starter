@@ -3,7 +3,7 @@ const { readdirSync } = require("fs");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const TerserWebpackPlugin = require("terser-webpack-plugin")
+const TerserWebpackPlugin = require("terser-webpack-plugin");
 
 const pagesDir = path.resolve(__dirname, "./src/pages");
 
@@ -31,13 +31,12 @@ pages.forEach((page) => {
       filename: page === "home" ? "index.html" : `${page}.html`,
       chunks: [`${page}`],
       title: page,
-      template: "src/pages/base-template.hbs",
+      template: `src/pages/${page}/${page}.template.hbs`,
       description: `${page} page`,
       minify: false,
     })
   );
 });
-
 
 module.exports = {
   entry: entryPoints,
@@ -62,10 +61,10 @@ module.exports = {
         extractComments: false,
         terserOptions: {
           format: {
-            comments: false
-          }
-        }
-      })
+            comments: false,
+          },
+        },
+      }),
     ],
     splitChunks: {
       chunks: "all",
@@ -91,19 +90,19 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
-          }, 
-          "css-loader"
+            loader: MiniCssExtractPlugin.loader,
+          },
+          "css-loader",
         ],
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader
-          }, 
+            loader: MiniCssExtractPlugin.loader,
+          },
           "css-loader",
-          "sass-loader"
+          "sass-loader",
         ],
       },
       {
@@ -119,7 +118,15 @@ module.exports = {
       },
       {
         test: /\.hbs$/,
-        use: ["handlebars-loader"],
+        use: {
+          loader: "handlebars-loader",
+          options: {
+            partialDirs: [
+              path.resolve(__dirname, "./src/pages/about/components/heading"),
+              path.resolve(__dirname, "./src/pages/home/components/heading"),
+            ],
+          },
+        },
       },
     ],
   },
