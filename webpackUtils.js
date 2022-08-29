@@ -4,40 +4,36 @@ const { readdirSync } = require("fs");
 const pagesDir = path.resolve(__dirname, "./src/pages");
 
 const getDirectories = (sourceDir) =>
-  readdirSync(sourceDir, { withFileTypes: true })
-    .filter((item) => item.isDirectory())
-    .map((dir) => dir.name);
+  readdirSync(sourceDir, { withFileTypes: true }).filter((item) =>
+    item.isDirectory()
+  );
 
 const getHbsPartialDirs = (sourceDir) => {
   const componentDirs = [];
   const allComponentPaths = [];
 
-  readdirSync(sourceDir, { withFileTypes: true })
-    .filter((item) => item.isDirectory())
-    .map((page) =>
-      componentDirs.push({
-        pageName: page.name,
-        path: `./src/pages/${page.name}/components`,
-      })
-    );
+  getDirectories(sourceDir).forEach((page) =>
+    componentDirs.push({
+      pageName: page.name,
+      path: `./src/pages/${page.name}/components`,
+    })
+  );
 
-  componentDirs.forEach((item) => {
-    readdirSync(item.path, { withFileTypes: true })
-      .filter((subItem) => subItem.isDirectory())
-      .map((componentDir) =>
-        allComponentPaths.push(
-          path.resolve(
-            __dirname,
-            `./src/pages/${item.pageName}/components/${componentDir.name}`
-          )
+  componentDirs.forEach((item) =>
+    getDirectories(item.path).forEach((componentDir) =>
+      allComponentPaths.push(
+        path.resolve(
+          __dirname,
+          `./src/pages/${item.pageName}/components/${componentDir.name}`
         )
-      );
-  });
+      )
+    )
+  );
 
   return allComponentPaths;
 };
 
-const pages = getDirectories(pagesDir);
+const pages = getDirectories(pagesDir).map((dir) => dir.name);
 
 const entryPoints = {};
 const pluginArray = [];
