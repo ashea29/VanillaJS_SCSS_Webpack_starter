@@ -44,9 +44,6 @@ const pluginArray = [];
 const hbsPatialDirs = getHbsPartialDirs(pagesDir);
 
 module.exports = {
-  pagesDir,
-  getDirectories,
-  getHbsPartialDirs,
   pages,
   entryPoints,
   pluginArray,
