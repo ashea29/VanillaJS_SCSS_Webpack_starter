@@ -1,19 +1,14 @@
 const path = require("path");
-const { readdirSync } = require("fs");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const pagesDir = path.resolve(__dirname, "./src/pages");
+const {
+  pages,
+  entryPoints,
+  pluginArray,
+  hbsPatialDirs,
+} = require("./webpackUtils");
 
-const getDirectories = (sourceDir) =>
-  readdirSync(sourceDir, { withFileTypes: true })
-    .filter((item) => item.isDirectory())
-    .map((dir) => dir.name);
-
-const pages = getDirectories(pagesDir);
-
-const entryPoints = {};
-const pluginArray = [];
 pluginArray.push(new CleanWebpackPlugin());
 
 pages.forEach((page) => {
@@ -24,13 +19,12 @@ pages.forEach((page) => {
       filename: page === "home" ? "index.html" : `${page}.html`,
       chunks: [`${page}`],
       title: page,
-      template: "src/pages/base-template.hbs",
+      template: `src/pages/${page}/${page}.template.hbs`,
       description: `${page} page`,
       minify: false,
     })
   );
 });
-
 
 module.exports = {
   entry: entryPoints,
@@ -42,7 +36,7 @@ module.exports = {
   mode: "development",
   devServer: {
     port: 3000,
-    open: true
+    open: true,
   },
   resolve: {
     alias: {
@@ -51,6 +45,7 @@ module.exports = {
       "@utils": path.resolve(__dirname, "./src/utils/"),
       "@src": path.resolve(__dirname, "./src/"),
       "@globalStyles": path.resolve(__dirname, "./src/globalStyles"),
+      "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
   module: {
@@ -89,7 +84,12 @@ module.exports = {
       },
       {
         test: /\.hbs$/,
-        use: ["handlebars-loader"],
+        use: {
+          loader: "handlebars-loader",
+          options: {
+            partialDirs: hbsPatialDirs,
+          },
+        },
       },
     ],
   },
