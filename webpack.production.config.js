@@ -47,6 +47,7 @@ module.exports = {
       "@utils": path.resolve(__dirname, "./src/utils/"),
       "@src": path.resolve(__dirname, "./src/"),
       "@globalStyles": path.resolve(__dirname, "./src/globalStyles"),
+      "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
   optimization: {
@@ -54,10 +55,14 @@ module.exports = {
     minimizer: [
       new TerserWebpackPlugin({
         extractComments: false,
+        parallel: true,
         terserOptions: {
           format: {
             comments: false,
           },
+          compress: {
+            drop_console: true
+          }
         },
       }),
     ],
