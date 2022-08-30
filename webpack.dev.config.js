@@ -2,12 +2,7 @@ const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const {
-  pages,
-  entryPoints,
-  pluginArray,
-  hbsPatialDirs,
-} = require("./webpackUtils");
+const { pages, entryPoints, pluginArray } = require("./webpackUtils");
 
 pluginArray.push(new CleanWebpackPlugin());
 
@@ -19,7 +14,7 @@ pages.forEach((page) => {
       filename: page === "home" ? "index.html" : `${page}.html`,
       chunks: [`${page}`],
       title: page,
-      template: `src/pages/${page}/${page}.template.hbs`,
+      template: `src/pages/${page}/${page}.template.ejs`,
       description: `${page} page`,
       minify: false,
     })
@@ -83,14 +78,18 @@ module.exports = {
         },
       },
       {
-        test: /\.hbs$/,
-        use: {
-          loader: "handlebars-loader",
-          options: {
-            partialDirs: hbsPatialDirs,
-          },
-        },
+        test: /\.ejs$/i,
+        use: ["html-loader", "template-ejs-loader"],
       },
+      //   {
+      //     test: /\.hbs$/,
+      //     use: {
+      //       loader: "handlebars-loader",
+      //       options: {
+      //         partialDirs: hbsPatialDirs,
+      //       },
+      //     },
+      //   },
     ],
   },
   plugins: pluginArray,
