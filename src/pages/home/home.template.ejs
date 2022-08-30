@@ -11,7 +11,7 @@
         <noscript>You need to enable JavaScript to run this app.</noscript>
         
         <main class="container">
-            {{> hero_heading.template text="Vanilla JS & Scss" linkText="Go to second page" href="about.html"}}
+            <%- include('@shared/hero_heading/hero_heading', { text: "Vanilla JS & Scss", linkText: "Go to second page", href: "about.html" }) %>
         </main>
     </body>
 </html>
