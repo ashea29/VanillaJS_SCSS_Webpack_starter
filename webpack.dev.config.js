@@ -1,6 +1,7 @@
 const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { htmlWebpackPluginTemplateCustomizer }  = require('template-ejs-loader')
 
 const { pages, entryPoints, pluginArray } = require("./webpackUtils");
 
@@ -13,12 +14,20 @@ pages.forEach((page) => {
     new HtmlWebpackPlugin({
       filename: page === "home" ? "index.html" : `${page}.html`,
       chunks: [`${page}`],
-      title: page,
+      template: htmlWebpackPluginTemplateCustomizer({
+        
+        templatePath: `src/pages/${page}/${page}.template.ejs`, // ejs template path 
+        
+        templateEjsLoaderOption:{ // set individual template-ejs-loader option here
+          data:{ // example, too.
+            title: page,
+            description:'test' // btw, you can have indivisual data injection for each .ejs file using data option
+          }
+        }
+      }),
       template: `src/pages/${page}/${page}.template.ejs`,
-      description: `${page} page`,
       minify: false,
-    })
-  );
+  }))
 });
 
 module.exports = {
@@ -79,7 +88,9 @@ module.exports = {
       },
       {
         test: /\.ejs$/i,
-        use: ["html-loader", "template-ejs-loader"],
+        use: {
+          loader: "template-ejs-loader",
+        },
       },
       //   {
       //     test: /\.hbs$/,

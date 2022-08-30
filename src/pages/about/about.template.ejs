@@ -4,14 +4,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="{{htmlWebpackPlugin.options.description}}">
-        <title>{{htmlWebpackPlugin.options.title}}</title>
+        <meta name="description" content="<%= templateEjsLoaderOption.description %>">
+        <title><%= templateEjsLoaderOption.title %></title>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
         
         <main class="container">
-            <%- include('@shared/hero_heading/hero_heading', { text: "A second page!", linkText: "Go to home page", href: "index.html"}) %>
+            <%- require('@shared/hero_heading/hero_heading.ejs'), { text: "A second page!", linkText: "Go to home page", href: "index.html"} %>
         </main>
     </body>
 </html>
