@@ -13,15 +13,16 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@layoutComponents": ["src/layoutComponents"],
-      "@layoutComponents/*": ["src/layoutComponents/*"],
+      "@layoutComponents": ["src/shared"],
+      "@layoutComponents/*": ["src/shared/*"],
       "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
       "@utils": ["src/utils"],
       "@utils/*": ["src/utils/*"],
       "@src": ["src"],
       "@src/*": ["src/*"],
-      "@globalStyles": ["src/globalStyles"]
+      "@globalStyles": ["src/globalStyles"],
+      "@shared": ["src/shared"]
     }
   },
   "include": ["**/*.ts", "**/*.js"],

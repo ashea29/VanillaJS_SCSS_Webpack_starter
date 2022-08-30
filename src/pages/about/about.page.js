@@ -1,18 +1,11 @@
-import { render } from "lit-html";
-import AboutTemplate from "./about.template";
-import Hero from "./components/hero/hero.module";
-// import "@src/global.scss";
+import Heading from "@shared/hero_heading/hero_heading.module";
 import "./about.page.scss";
 
 class About {
-  template = AboutTemplate;
-
-  components = [{ module: Hero }];
+  components = [{ module: Heading }];
 
   init() {
-    const renderTarget = document.body;
-    render(this.template, renderTarget);
-
+    console.log("About page");
     this.initComponents();
   }
 
