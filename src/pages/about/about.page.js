@@ -1,4 +1,4 @@
-import Heading from "./components/heading/aboutHeading.module";
+import Heading from "@shared/hero_heading/hero_heading.module";
 import "./about.page.scss";
 
 class About {
