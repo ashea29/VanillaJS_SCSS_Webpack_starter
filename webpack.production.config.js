@@ -111,15 +111,6 @@ module.exports = {
           },
         },
       },
-      //   {
-      //     test: /\.hbs$/,
-      //     use: {
-      //       loader: "handlebars-loader",
-      //       options: {
-      //         partialDirs: hbsPatialDirs,
-      //       },
-      //     },
-      //   },
     ],
   },
   plugins: pluginArray,
